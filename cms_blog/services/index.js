@@ -1,4 +1,4 @@
-import {request ,gql} from 'graphql-request'
+import { request, gql } from 'graphql-request'
 
 const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHICS_ENDPOINT;
 
@@ -35,6 +35,8 @@ export const getPost = async () => {
       
     `
 
-    const results = await request(graphqlAPI,query)
+    const results = await request(graphqlAPI, query);
+
+    return results.postsConnection.edges;
 
 }
