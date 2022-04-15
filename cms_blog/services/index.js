@@ -4,7 +4,7 @@ const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHICS_ENDPOINT;
 
 export const getPost = async () => {
 
-    const query = gql`
+  const query = gql`
     query MyQuery {
         postsConnection {
           edges {
@@ -35,10 +35,45 @@ export const getPost = async () => {
       
     `
 
-    const results = await request(graphqlAPI, query);
+  const results = await request(graphqlAPI, query);
 
-    return results.postsConnection.edges;
+  return results.postsConnection.edges;
 
+};
+
+
+export const getPostDetails = async (slug) => {
+  const query = gql`
+    query GetPostDetails($slug : String!) {
+      post(where: {slug: $slug}) {
+        title
+        excerpt
+        featuredimage {
+          url
+        }
+        author{
+          name
+          bio
+          photo {
+            url
+          }
+        }
+        createdAt
+        slug
+        content {
+          raw
+        }
+        categories {
+          name
+          slug
+        }
+      }
+    }
+  `;
+
+  const result = await request(graphqlAPI, query, { slug });
+
+  return result.post;
 };
 
 export const getRecentPosts = async () => {
@@ -58,11 +93,11 @@ export const getRecentPosts = async () => {
       }
   `
 
-  const result = await request(graphqlAPI,query);
+  const result = await request(graphqlAPI, query);
   return result.posts;
 }
 
-export const getSimilarPosts = async() => {
+export const getSimilarPosts = async () => {
 
   const query = gql`
       query GetPostDetails($slug: String!, $categories:[String!]){
@@ -80,11 +115,11 @@ export const getSimilarPosts = async() => {
       }
   `
 
-  const result = await request(graphqlAPI,query);
+  const result = await request(graphqlAPI, query);
   return result.posts;
 }
 
-export const getCategories = async() => {
+export const getCategories = async () => {
   const query = gql`
     query GetCategories {
       categories {
@@ -93,7 +128,7 @@ export const getCategories = async() => {
       }
     }
   `
-  const result = await request(graphqlAPI,query);
+  const result = await request(graphqlAPI, query);
   return result.categories;
 
 }
