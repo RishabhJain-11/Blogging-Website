@@ -41,7 +41,7 @@ export const getPosts = async () => {
 
 export const getCategories = async () => {
   const query = gql`
-    query GetGategories {
+    query GetCategories {
         categories {
           name
           slug
@@ -60,7 +60,7 @@ export const getPostDetails = async (slug) => {
       post(where: {slug: $slug}) {
         title
         excerpt
-        featuredimage{
+        featuredimage {
           url
         }
         author{
@@ -141,7 +141,7 @@ export const getAdjacentPosts = async (createdAt, slug) => {
 
   const result = await request(graphqlAPI, query, { slug, createdAt });
 
-  return { next: result.next[0], previous: result.previous[0] };
+  return  {next: result.next[0], previous: result.previous[0]};
 };
 
 export const getCategoryPost = async (slug) => {
