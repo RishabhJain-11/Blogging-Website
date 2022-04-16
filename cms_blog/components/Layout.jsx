@@ -1,21 +1,11 @@
-import React from 'react'
-import { Header } from './';
+import React from 'react';
+import Header from './Header';
 
-const Layout = ({ children }) => {
-    return (
-        <>
-            <Header />
-            {children}
-        </>
-    )
-}
-/*
-10 hrs 
-- web dev ke 5 projects finish
-- devops complete 
-- flutter ka half complete can complete.
-- web dev's backend complete can be done 
-- a lot of college portion can be completed.
-*/
+const Layout = ({ children }) => (
+  <>
+    <Header />
+    {children}
+  </>
+);
 
-export default Layout
+export default Layout;
