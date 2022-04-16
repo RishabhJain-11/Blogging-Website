@@ -1,5 +1,5 @@
-import React,{useState , useEffect} from 'react';
-import 'tailwindcss/tailwind.css'
+import React from 'react';
+
 import '../styles/globals.scss';
 import { Layout } from '../components';
 
